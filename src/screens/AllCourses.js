@@ -1,18 +1,78 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { colors } from '../global.styles';
 
-import './AllCourses.css';
+const CourseList = styled.div`
+  padding-top: 2px;
+  padding-bottom: 1px;
+`;
+
+const CourseItem = styled.div`
+  border-radius: 1.5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 5px 16px 17px 16px;
+  margin: 10px 11px 12px 11px;
+  background: white;
+  position: relative;
+  border: 0.5px solid #ccc;
+`;
+
+const Title = styled.h2`
+  width: 90%;
+  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 22px;
+`;
+
+const Description = styled.p`
+  width: 90%;
+`;
+
+const TagsContainer = styled.div`
+  margin-top: 20px;
+  font-size: 11px;
+  color: #777;
+  font-weight: 500;
+
+  a {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    background: ${colors.primary};
+    padding: 2px 5px 2.5px 5px;
+    margin: 6px 7px 0 0;
+    text-transform: uppercase;
+  }
+`;
 
 
-const CourseItem = ({ id, name, description }) => {
+const Item = ({ id, name, description }) => {
+
+  const tagsList = [
+    { id: 1, name: 'react' },
+    { id: 2, name: 'redux' },
+    { id: 3, name: 'firebase' },
+    { id: 4, name: 'node' },
+    { id: 5, name: 'react native' },
+    { id: 6, name: 'real-time' }
+  ];
+
   return (
-    <div className="CourseItem">
-      <div>
-        <span>#{id}</span>
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <small>TAGS <a href="#">javascript</a><a href="#">react</a><a href="#">redux</a></small>
-      </div>
-    </div >
+    <CourseItem>
+      <Title>{name}</Title>
+      <Description>{description}</Description>
+      <TagsContainer>
+        {
+          tagsList.map(tag => {
+            return (
+              <a key={tag.id} href="">{tag.name}</a>
+            )
+          })
+        }
+      </TagsContainer>
+
+    </CourseItem >
   );
 };
 
@@ -32,23 +92,19 @@ class AllCourses extends Component {
 
   render() {
     return (
-      <div className='scrollable-area' style={{ height: "calc(100vh - 94px)" }}>
-        <div className="AllCourses">
+      <div className='scrollable-area' style={{ height: "calc(100vh - 114px)" }}>
+        <CourseList>
           {
             this.state.courses.map((course, i) => {
               return (
-                <CourseItem key={i} id={course.id} name={course.name} description={course.description} />
+                <Item key={i} id={course.id} name={course.name} description={course.description} />
               )
             })
           }
-        </div>
+        </CourseList>
       </div>
     );
   }
 }
-
-AllCourses.propTypes = {
-
-};
 
 export default AllCourses;

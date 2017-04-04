@@ -13,19 +13,26 @@ const AppContainer = styled.div`
 `;
 
 const Header = styled.div`
-  height: 44px;
-  line-height: 41px;
-  padding: 1px 10px 0 10px;
+  height: 64px;
+  padding: 1px 11px 0 11px;
   font-size: 17px;
   font-weight: 700;
-  background: ${colors.white};
+  background: linear-gradient(20deg, ${colors.gradientFrom} 0%, ${colors.gradientTo} 100%);
   border-bottom: 0.5px solid ${colors.line};
+`;
+
+const HeaderWrapper = styled.div`
+  height: 44px;
+  margin-top: 20px;
 `;
 
 const HeaderButton = styled.div`
   font-weight: 400;
+  height: 44px;
+  line-height: 41px;
   font-size: 15px;
   color: ${colors.primary};
+  color: white;
 `;
 
 const Tabs = styled.div`
@@ -71,18 +78,20 @@ class App extends Component {
       <AppContainer>
 
         <Header>
-          <HeaderButton style={{ float: 'left' }}>All Courses</HeaderButton>
-          <HeaderButton style={{ float: 'right' }}>Let's Learn</HeaderButton>
+          <HeaderWrapper>
+            <HeaderButton style={{ float: 'left' }}>All Courses</HeaderButton>
+            <HeaderButton style={{ float: 'right' }}>Let's Learn</HeaderButton>
+          </HeaderWrapper>
         </Header>
 
         <AllCourses />
 
         <Tabs>
           <ul>
-            <li><a href="#">All Courses</a></li>
-            <li><a href="#">All Courses 2</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
+            <li><a href="#">Primary Group</a></li>
+            <li><a href="#">Secondary</a></li>
+            <li><a href="#">[~]</a></li>
+            <li><a href="#">[s]</a></li>
           </ul>
         </Tabs>
 

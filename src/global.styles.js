@@ -2,8 +2,13 @@
 
 import { injectGlobal } from 'styled-components';
 
+// '#0077ff' #ed1262
+
 const colors = {
-  primary: '#ed1262',
+  gradientFrom: '#2E3192',
+  gradientTo: '#ED1E79',
+
+  primary: '#ED1E79',
   alternate: 'lime',
   line: '#dedede',
   black: '#282828',
