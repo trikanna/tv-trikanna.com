@@ -2,6 +2,7 @@
   "name": "tv-trikanna-com",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tv.trikanna.com/",
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
