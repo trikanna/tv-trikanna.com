@@ -38,8 +38,8 @@ const TagsContainer = styled.div`
   a {
     text-decoration: none;
     display: inline-block;
-    color: white;
-    background: ${colors.primary};
+    color: ${colors.black};
+    background: ${colors.line};
     padding: 2px 5px 2.5px 5px;
     margin: 6px 7px 0 0;
     text-transform: uppercase;
@@ -92,7 +92,7 @@ class AllCourses extends Component {
 
   render() {
     return (
-      <div className='scrollable-area' style={{ height: "calc(100vh - 114px)" }}>
+      <div className='scrollable-area' style={{ height: "calc(100vh - 131px)" }}>
         <CourseList>
           {
             this.state.courses.map((course, i) => {
