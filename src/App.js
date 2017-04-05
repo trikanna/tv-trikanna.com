@@ -6,6 +6,35 @@ import { colors } from './global.styles';
 
 import ReactGA from 'react-ga';
 
+import {
+  GoMortarBoard,
+  GoFileText,
+  GoRepo,
+  GoGitBranch,
+  GoGear,
+  GoTerminal
+} from 'react-icons/lib/go';
+
+
+import {
+  IoIosFolder,
+  IoIosArrowRight,
+  IoIosArrowLeft,
+  IoAndroidAdd,
+  IoIosCloud,
+  IoDocument,
+  IoAndroidDocument,
+  IoDocumentText,
+  IoFiling,
+  IoIosFolderOutline,
+  IoIosFilm,
+  IoIosFilmOutline,
+  IoIosBookmarksOutline,
+  IoIosCogOutline,
+  IoIosGearOutline,
+  IoIosUploadOutline
+} from 'react-icons/lib/io';
+
 const AppContainer = styled.div`
   background: ${colors.gray};
 
@@ -16,7 +45,7 @@ const AppContainer = styled.div`
 
 const Header = styled.div`
   height: 64px;
-  padding: 1px 11px 0 11px;
+  padding: 1px 8pt 0 8pt;
   font-size: 17px;
   font-weight: 700;
   background: linear-gradient(20deg, ${colors.gradientFrom} 0%, ${colors.gradientTo} 100%);
@@ -33,14 +62,21 @@ const HeaderButton = styled.div`
   height: 44px;
   line-height: 41px;
   font-size: 15px;
-  color: ${colors.primary};
-  color: white;
+  color: ${colors.white};
+
+  svg {
+    margin-top: -1.5pt;
+    color: ${colors.white};
+    font-size: 18pt;
+    margin-right: 7px;
+  }
 `;
 
 const Tabs = styled.div`
-  height: 49px;
+  height: 49pt;
   background: ${colors.white};
   border-top: 0.5px solid ${colors.line};
+  background: rgb(249, 249, 249);
 
   ul {
     margin: 0;
@@ -54,6 +90,7 @@ const Tabs = styled.div`
       width: auto;
       min-width: 60px;
       text-align: center;
+      width: 25%;
 
       &:first-child a {
         border-left: none;
@@ -63,11 +100,29 @@ const Tabs = styled.div`
         text-decoration: none;
         padding: 0 15px;
         display: block;
-        background: ${colors.white};
-        color: ${colors.primary};
-        border-left: 0.5px solid ${colors.line};
-        height: 48px;
-        line-height: 46px;
+        // background: ${colors.white};
+        //color: ${colors.primary};
+
+        // border-left: 0.5px solid ${colors.line};
+        height: 49pt;
+        line-height: 83pt;
+        font-size: 10pt;
+        position: relative;
+        color: rgb(141,141,141);
+
+        &.active {
+          color: ${colors.gradientFrom};
+        }
+
+        svg {
+          margin-right: 5px;
+          font-size: 33px;
+          position: absolute;
+          top: 7pt;
+          left: calc(50% - 12pt);
+          width:  24pt;
+          height: 24pt;
+        }
       }
     }
   }
@@ -78,10 +133,14 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    ReactGA.initialize('UA-92692542-1');
+    this.initializeAnalytics();
+  }
 
-    // This just needs to be called once since we have no routes in this case.
-    ReactGA.pageview(window.location.pathname);
+  initializeAnalytics() {
+    if (process.env.NODE_ENV === 'production') {
+      ReactGA.initialize('UA-92692542-1');
+      ReactGA.pageview(window.location.pathname);
+    }
   }
 
   render() {
@@ -90,8 +149,8 @@ class App extends Component {
 
         <Header>
           <HeaderWrapper>
-            <HeaderButton style={{ float: 'left' }}>All Courses</HeaderButton>
-            <HeaderButton style={{ float: 'right' }}>Let's Learn</HeaderButton>
+            <HeaderButton style={{ float: 'left' }}><GoTerminal />All Courses</HeaderButton>
+            <HeaderButton style={{ float: 'right', display: 'none' }}>+</HeaderButton>
           </HeaderWrapper>
         </Header>
 
@@ -99,14 +158,14 @@ class App extends Component {
 
         <Tabs>
           <ul>
-            <li><a href="#">Primary Group</a></li>
-            <li><a href="#">Secondary</a></li>
-            <li><a href="#">[~]</a></li>
-            <li><a href="#">[s]</a></li>
+            <li><a href="#" className="active"><IoIosFilm />Courses</a></li>
+            <li><a href="#"><IoIosBookmarksOutline />Articles</a></li>
+            <li><a href="#"><IoIosUploadOutline />Share</a></li>
+            <li><a href="#"><IoIosGearOutline />Settings</a></li>
           </ul>
         </Tabs>
 
-      </AppContainer>
+      </AppContainer >
     );
   }
 }
