@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import AllCourses from './screens/AllCourses';
+import CourseDetail from './screens/CourseDetail';
 import styled from 'styled-components';
 
 import { colors } from './global.styles';
 
 import ReactGA from 'react-ga';
 
-import { GoTerminal } from 'react-icons/lib/go';
-
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Redirect
+} from 'react-router-dom';
 
 import {
-  IoIosFilm,
+  IoIosFilmOutline,
   IoIosBookmarksOutline,
   IoIosGearOutline,
   IoIosUploadOutline
@@ -22,35 +27,6 @@ const AppContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-`;
-
-const Header = styled.div`
-  height: 64px;
-  padding: 1px 8pt 0 8pt;
-  font-size: 17px;
-  font-weight: 700;
-  background: linear-gradient(20deg, ${colors.gradientFrom} 0%, ${colors.gradientTo} 100%);
-  border-bottom: 0.5px solid ${colors.line};
-`;
-
-const HeaderWrapper = styled.div`
-  height: 44px;
-  margin-top: 20px;
-`;
-
-const HeaderButton = styled.div`
-  font-weight: 400;
-  height: 44px;
-  line-height: 41px;
-  font-size: 15px;
-  color: ${colors.white};
-
-  svg {
-    margin-top: -1.5pt;
-    color: ${colors.white};
-    font-size: 18pt;
-    margin-right: 7px;
-  }
 `;
 
 const Tabs = styled.div`
@@ -126,27 +102,27 @@ class App extends Component {
 
   render() {
     return (
-      <AppContainer>
+      <Router>
+        <AppContainer>
 
-        <Header>
-          <HeaderWrapper>
-            <HeaderButton style={{ float: 'left' }}><GoTerminal />All Courses</HeaderButton>
-            <HeaderButton style={{ float: 'right', display: 'none' }}>+</HeaderButton>
-          </HeaderWrapper>
-        </Header>
+          <Route exact path="/" render={() => (
+            <Redirect to="/courses/all" />
+          )} />
 
-        <AllCourses />
+          <Route path="/courses/:id" component={AllCourses} />
+          <Route path="/course/:id" component={CourseDetail} expanded={true} />
 
-        <Tabs>
-          <ul>
-            <li><a href="#" className="active"><IoIosFilm />Courses</a></li>
-            <li><a href="#"><IoIosBookmarksOutline />Articles</a></li>
-            <li><a href="#"><IoIosUploadOutline />Share</a></li>
-            <li><a href="#"><IoIosGearOutline />Settings</a></li>
-          </ul>
-        </Tabs>
+          <Tabs>
+            <ul>
+              <li><NavLink to="/courses/all"><IoIosFilmOutline />Courses</NavLink></li>
+              <li><NavLink to="/articles/all"><IoIosBookmarksOutline />Articles</NavLink></li>
+              <li><NavLink to="/share"><IoIosUploadOutline />Share</NavLink></li>
+              <li><NavLink to="/settings"><IoIosGearOutline />Settings</NavLink></li>
+            </ul>
+          </Tabs>
 
-      </AppContainer >
+        </AppContainer >
+      </Router>
     );
   }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors } from '../global.styles';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 const CourseList = styled.div`
   padding-top: 2px;
@@ -15,6 +17,11 @@ const CourseItem = styled.div`
   background: white;
   position: relative;
   border: 0.5px solid #ccc;
+
+  a {
+    text-decoration: none;
+    color: ${colors.black};
+  }
 `;
 
 const Title = styled.h2`
@@ -50,29 +57,31 @@ const TagsContainer = styled.div`
 const Item = ({ id, name, description }) => {
 
   const tagsList = [
-    { id: 1, name: 'react' },
-    { id: 2, name: 'redux' },
-    { id: 3, name: 'firebase' },
-    { id: 4, name: 'node' },
-    { id: 5, name: 'react native' },
-    { id: 6, name: 'real-time' }
+    { id: 1, name: 'react', slug: 'react' },
+    { id: 2, name: 'redux', slug: 'redux' },
+    { id: 3, name: 'firebase', slug: 'firebase' },
+    { id: 4, name: 'node', slug: 'nodejs' },
+    { id: 5, name: 'native', slug: 'react-native' },
+    { id: 6, name: 'real-time', slug: 'real-time' }
   ];
 
   return (
     <CourseItem>
-      <Title>{name}</Title>
+      <Link to={`/course/${id}`}>
+        <Title>{name}</Title>
+      </Link>
       <Description>{description}</Description>
       <TagsContainer>
         {
           tagsList.map(tag => {
             return (
-              <a key={tag.id} href="">{tag.name}</a>
+              <Link key={tag.id} to={`/courses/${tag.name}`}>{tag.name}</Link>
             )
           })
         }
       </TagsContainer>
 
-    </CourseItem >
+    </CourseItem>
   );
 };
 
@@ -80,10 +89,12 @@ class AllCourses extends Component {
   constructor(state, props) {
     super(state, props);
 
+    console.log(this.props.match.params)
+
     this.state = {
       courses: [
         { id: 1, name: "React.js: Getting Started", description: "Learn the basics of React.js, and build an in-browser, math skills kids' game from scratch with it." },
-        { id: 2, name: "Building Applications with React and Redux in ES6", description: "Learn how to use Redux, React Router, and ES6 to build a real world app with React. Use Webpack, Babel, ESLint, npm scripts, Mocha, Enzyme, and more to build a rich, one step, custom React development environment and build process from the ground up." },
+        { id: 2, name: "Building Applications with React and Redux in ES6", description: "Learn how to use Redux, React Router, and ES6 to build a real world app with React. Use Webpack, Babel, ESLint, npm scripts, Mocha, Enzyme, and more." },
         { id: 3, name: "Building Applications with React and Flux", description: "Get started with React, React Router, and Flux by building a fast, data-driven single page application." },
         { id: 4, name: "React Fundamentals", description: "React is a high-performance, reactive UI library for client-side web applications." }
       ]
@@ -92,16 +103,21 @@ class AllCourses extends Component {
 
   render() {
     return (
-      <div className='scrollable-area' style={{ height: "calc(100vh - 131px)" }}>
-        <CourseList>
-          {
-            this.state.courses.map((course, i) => {
-              return (
-                <Item key={i} id={course.id} name={course.name} description={course.description} />
-              )
-            })
-          }
-        </CourseList>
+      <div>
+
+        <Header label={this.props.match.params.id} />
+
+        <div className='scrollable-area' style={{ height: "calc(100vh - 131px)" }}>
+          <CourseList>
+            {
+              this.state.courses.map((course, i) => {
+                return (
+                  <Item key={i} id={course.id} name={course.name} description={course.description} />
+                )
+              })
+            }
+          </CourseList>
+        </div>
       </div>
     );
   }
