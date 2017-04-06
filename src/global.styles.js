@@ -39,6 +39,7 @@ injectGlobal`
     font-size: 14px;
     background-color: ${colors.white};
     color: ${colors.black};
+    background: lime;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -50,6 +51,10 @@ injectGlobal`
     margin: 0 0 20px 0;
     line-height: 1.5;
     font-weight: 500;
+  }
+
+  a {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
   .hidden {
