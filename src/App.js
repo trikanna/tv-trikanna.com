@@ -6,31 +6,12 @@ import { colors } from './global.styles';
 
 import ReactGA from 'react-ga';
 
-import {
-  GoMortarBoard,
-  GoFileText,
-  GoRepo,
-  GoGitBranch,
-  GoGear,
-  GoTerminal
-} from 'react-icons/lib/go';
+import { GoTerminal } from 'react-icons/lib/go';
 
 
 import {
-  IoIosFolder,
-  IoIosArrowRight,
-  IoIosArrowLeft,
-  IoAndroidAdd,
-  IoIosCloud,
-  IoDocument,
-  IoAndroidDocument,
-  IoDocumentText,
-  IoFiling,
-  IoIosFolderOutline,
   IoIosFilm,
-  IoIosFilmOutline,
   IoIosBookmarksOutline,
-  IoIosCogOutline,
   IoIosGearOutline,
   IoIosUploadOutline
 } from 'react-icons/lib/io';
